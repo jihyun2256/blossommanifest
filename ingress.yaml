@@ -13,7 +13,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: "sb3.bipa-g3-ec.click"   # ← 여기에 도메인 설정됨!
+      http:
         paths:
           - path: /users
             pathType: Prefix

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lex-api
+  namespace: default
+  labels:
+    app: lex-api
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lex-api
+  template:
+    metadata:
+      labels:
+        app: lex-api
+        tier: backend
+    spec:
+      containers:
+      - name: lex-api
+        image: 337112169365.dkr.ecr.ap-northeast-2.amazonaws.com/blossom/lex-api
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3006
+          protocol: TCP
+        env:
+        env:
+        - name: PORT
+          value: "3006"
+        - name: DB_HOST
+          value: "sb3-u1-aurora.cluster-cpuskg4g6hoy.ap-northeast-2.rds.amazonaws.com"
+        - name: DB_USER
+          value: "admin"
+        - name: DB_PASSWORD
+          value: "Admin1234!"
+        - name: DB_NAME
+          value: "blossom"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lex-api-service
+  namespace: default
+  labels:
+    app: lex-api
+spec:
+  type: ClusterIP
+  selector:
+    app: lex-api
+  ports:
+  - port: 80
+    targetPort: 3006
+    protocol: TCP
+    name: http
+  sessionAffinity: None
