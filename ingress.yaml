@@ -12,15 +12,15 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: users-service
                 port:
                   number: 80
           # Cards API
-          - path: /cards
+          - path: /carts
             pathType: Prefix
             backend:
               service:
-                name: cards-service
+                name: carts-service
                 port:
                   number: 80
           # Orders API
@@ -28,7 +28,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: order-service
+                name: orders-service
                 port:
                   number: 80
           # Products API
@@ -36,7 +36,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: product-service
+                name: products-service
                 port:
                   number: 80
           # Payments API
@@ -44,7 +44,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: payment-service
+                name: payments-service
                 port:
                   number: 80
           
@@ -52,6 +52,6 @@ spec:
               pathType: Prefix
               backend:
                service:
-                name: payment-service
+                name: payments-service
                 port:
                   number: 80
