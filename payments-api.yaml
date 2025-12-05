@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: payment-service
+  name: payments-service
   labels:
     app: payments
 spec:
