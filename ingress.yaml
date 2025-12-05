@@ -2,12 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: blossom-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /users
+
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
-          # Users API
           - path: /users
             pathType: Prefix
             backend:
@@ -15,7 +22,7 @@ spec:
                 name: users-service
                 port:
                   number: 80
-          # Cards API
+
           - path: /carts
             pathType: Prefix
             backend:
@@ -23,7 +30,7 @@ spec:
                 name: carts-service
                 port:
                   number: 80
-          # Orders API
+
           - path: /orders
             pathType: Prefix
             backend:
@@ -31,7 +38,7 @@ spec:
                 name: orders-service
                 port:
                   number: 80
-          # Products API
+
           - path: /products
             pathType: Prefix
             backend:
@@ -39,19 +46,11 @@ spec:
                 name: products-service
                 port:
                   number: 80
-          # Payments API
+
           - path: /payments
             pathType: Prefix
             backend:
               service:
-                name: payments-service
-                port:
-                  number: 80
-          
-          - - path: /cards
-              pathType: Prefix
-              backend:
-               service:
                 name: payments-service
                 port:
                   number: 80
