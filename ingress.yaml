@@ -54,3 +54,10 @@ spec:
                 port:
                   number: 80
 
+          - path: /lex
+            pathType: Prefix
+            backend:
+              service:
+                name: lex-api-service
+                port:
+                  number: 80

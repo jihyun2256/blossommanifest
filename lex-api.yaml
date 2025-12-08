@@ -25,7 +25,6 @@ spec:
         - containerPort: 3006
           protocol: TCP
         env:
-        env:
         - name: PORT
           value: "3006"
         - name: DB_HOST
@@ -53,4 +52,3 @@ spec:
     targetPort: 3006
     protocol: TCP
     name: http
-  sessionAffinity: None
