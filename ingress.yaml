@@ -10,10 +10,18 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/healthcheck-path: /users
 
-    # ⭐ CORS 문제가 ALB에서 발생하지 않도록 하는 핵심 설정
+    # ⭐ CORS / Host Header 관련
     alb.ingress.kubernetes.io/success-codes: "200,204"
     alb.ingress.kubernetes.io/preserve-host-header: "true"
 
+    # ⭐⭐ 가장 중요한 부분: 경로 재작성 활성화
+    alb.ingress.kubernetes.io/actions.payments-rewrite: >
+      {"Type": "redirect", "RedirectConfig":
+        { "Protocol": "HTTP", "Host": "#{host}", "Port": "80",
+          "Path": "/",
+          "Query": "#{query}", "StatusCode": "HTTP_301"
+        }
+      }
 spec:
   ingressClassName: alb
   rules:
@@ -51,6 +59,7 @@ spec:
                 port:
                   number: 80
 
+          # ⭐ rewrite 적용되는 payments 경로
           - path: /payments
             pathType: Prefix
             backend:
