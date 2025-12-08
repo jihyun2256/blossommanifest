@@ -9,6 +9,11 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/healthcheck-path: /users
+
+    # ⭐ CORS 문제가 ALB에서 발생하지 않도록 하는 핵심 설정
+    alb.ingress.kubernetes.io/success-codes: "200,204"
+    alb.ingress.kubernetes.io/preserve-host-header: "true"
+
 spec:
   ingressClassName: alb
   rules:
