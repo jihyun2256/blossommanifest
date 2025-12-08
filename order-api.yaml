@@ -21,7 +21,7 @@ spec:
         - containerPort: 3003
         env:
         - name: PORT
-          value: "3004"
+          value: "3003"
         - name: DB_HOST
           value: "sb3-u1-aurora.cluster-cpuskg4g6hoy.ap-northeast-2.rds.amazonaws.com"
         - name: DB_USER
