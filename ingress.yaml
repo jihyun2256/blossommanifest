@@ -7,71 +7,93 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
     alb.ingress.kubernetes.io/healthcheck-path: /users
-
-    # ⭐ CORS / Host Header 관련
     alb.ingress.kubernetes.io/success-codes: "200,204"
     alb.ingress.kubernetes.io/preserve-host-header: "true"
 
-    # ⭐⭐ 가장 중요한 부분: 경로 재작성 활성화
-    alb.ingress.kubernetes.io/actions.payments-rewrite: >
-      {"Type": "redirect", "RedirectConfig":
-        { "Protocol": "HTTP", "Host": "#{host}", "Port": "80",
-          "Path": "/",
-          "Query": "#{query}", "StatusCode": "HTTP_301"
+    # ⭐⭐ 핵심: ALB rewrite action 정의
+    alb.ingress.kubernetes.io/actions.rewrite-payments: >
+      {
+        "Type": "forward",
+        "ForwardConfig": {
+          "TargetGroups": [
+            {
+              "ServiceName": "payments-service",
+              "ServicePort": "80"
+            }
+          ]
         }
       }
+
 spec:
   ingressClassName: alb
   rules:
-    - http:
-        paths:
-          - path: /users
-            pathType: Prefix
-            backend:
-              service:
-                name: users-service
-                port:
-                  number: 80
+  - http:
+      paths:
 
-          - path: /carts
-            pathType: Prefix
-            backend:
-              service:
-                name: carts-service
-                port:
-                  number: 80
+      # ===========================
+      # USERS
+      # ===========================
+      - path: /users
+        pathType: Prefix
+        backend:
+          service:
+            name: users-service
+            port:
+              number: 80
 
-          - path: /orders
-            pathType: Prefix
-            backend:
-              service:
-                name: orders-service
-                port:
-                  number: 80
+      # ===========================
+      # CARTS
+      # ===========================
+      - path: /carts
+        pathType: Prefix
+        backend:
+          service:
+            name: carts-service
+            port:
+              number: 80
 
-          - path: /products
-            pathType: Prefix
-            backend:
-              service:
-                name: products-service
-                port:
-                  number: 80
+      # ===========================
+      # ORDERS
+      # ===========================
+      - path: /orders
+        pathType: Prefix
+        backend:
+          service:
+            name: orders-service
+            port:
+              number: 80
 
-          # ⭐ rewrite 적용되는 payments 경로
-          - path: /payments
-            pathType: Prefix
-            backend:
-              service:
-                name: payments-service
-                port:
-                  number: 80
+      # ===========================
+      # PRODUCTS
+      # ===========================
+      - path: /products
+        pathType: Prefix
+        backend:
+          service:
+            name: products-service
+            port:
+              number: 80
 
-          - path: /lex
-            pathType: Prefix
-            backend:
-              service:
-                name: lex-api-service
-                port:
-                  number: 80
+      # ===========================
+      # PAYMENTS (Rewrite 기능 적용됨)
+      # ===========================
+      - path: /payments
+        pathType: Prefix
+        backend:
+          service:
+            name: payments-service
+            port:
+              number: 80
+
+      # ===========================
+      # LEX API
+      # ===========================
+      - path: /lex
+        pathType: Prefix
+        backend:
+          service:
+            name: lex-api-service
+            port:
+              number: 80
