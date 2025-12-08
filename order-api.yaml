@@ -18,7 +18,7 @@ spec:
       - name: order
         image: 337112169365.dkr.ecr.ap-northeast-2.amazonaws.com/blossom/order-api:latest
         ports:
-        - containerPort: 3004
+        - containerPort: 3003
         env:
         - name: PORT
           value: "3004"
@@ -47,4 +47,4 @@ spec:
     app: order
   ports:
   - port: 80
-    targetPort: 3004
+    targetPort: 3003
