@@ -30,6 +30,9 @@ spec:
           value: "Admin1234!"
         - name: DB_NAME
           value: "blossom"
+        - name: ORDER_API_URL
+          value: "http://orders-service"
+        
 ---
 apiVersion: v1
 kind: Service

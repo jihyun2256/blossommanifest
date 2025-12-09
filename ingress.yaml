@@ -12,19 +12,6 @@ metadata:
     alb.ingress.kubernetes.io/success-codes: "200,204"
     alb.ingress.kubernetes.io/preserve-host-header: "true"
 
-    # ⭐⭐ 핵심: ALB rewrite action 정의
-    alb.ingress.kubernetes.io/actions.rewrite-payments: >
-      {
-        "Type": "forward",
-        "ForwardConfig": {
-          "TargetGroups": [
-            {
-              "ServiceName": "payments-service",
-              "ServicePort": "80"
-            }
-          ]
-        }
-      }
 
 spec:
   ingressClassName: alb
