@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis-image:latest
+          image: redis:alpine
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 6379
@@ -46,6 +46,7 @@ spec:
         name: redis-data
       spec:
         accessModes: ["ReadWriteOnce"]
+        storageClassName: "standard"
         resources:
           requests:
             storage: 1Gi
