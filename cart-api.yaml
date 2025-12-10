@@ -31,7 +31,7 @@ spec:
         - name: DB_NAME
           value: "blossom"
         - name: REDIS_HOST
-          value: "sb3-u1-redis-ro.8yu9pt.ng.0001.apn2.cache.amazonaws.com"
+          value: "${REDIS_ENDPOINT}"
         - name: REDIS_PORT
           value: "6379"
 ---
