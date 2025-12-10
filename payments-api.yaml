@@ -32,6 +32,10 @@ spec:
           value: "blossom"
         - name: ORDER_API_URL
           value: "http://orders-service"
+        - name: REDIS_HOST
+          value: "sb3-u1-redis-ro.8yu9pt.ng.0001.apn2.cache.amazonaws.com:6379"
+        - name: REDIS_PORT
+          value: "6379"
         
 ---
 apiVersion: v1
