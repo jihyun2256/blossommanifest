@@ -1,0 +1,37 @@
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: default
+spec:
+  # consolidation.enabled → NodePool 신버전 옵션 대응
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+
+  limits:
+    cpu: 1000
+
+  template:
+    metadata:
+      labels:
+        nodepool: default
+    spec:
+      nodeClassRef:
+        name: default
+
+      requirements:
+        # 구 provisioner requirements 그대로 반영
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values:
+            - on-demand
+            - spot
+
+        - key: kubernetes.io/arch
+          operator: In
+          values:
+            - amd64
+
+        - key: kubernetes.io/os
+          operator: In
+          values:
+            - linux
