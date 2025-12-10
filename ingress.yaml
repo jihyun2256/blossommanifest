@@ -16,7 +16,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - http:
+  - host: www.bipa-g3-ec.click
+    http:
       paths:
 
       # ===========================
