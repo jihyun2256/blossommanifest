@@ -1,32 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lex-api
-  namespace: default
+  name: payments-deployment
   labels:
-    app: lex-api
-    tier: backend
+    app: payments
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: lex-api
+      app: payments
   template:
     metadata:
       labels:
-        app: lex-api
-        tier: backend
+        app: payments
     spec:
       containers:
-      - name: lex-api
-        image: 337112169365.dkr.ecr.ap-northeast-2.amazonaws.com/blossom/lex-api
-        imagePullPolicy: Always
+      - name: payments
+        image: 337112169365.dkr.ecr.ap-northeast-2.amazonaws.com/blossom/payments-api:latest
         ports:
-        - containerPort: 3006
-          protocol: TCP
+        - containerPort: 3005
         env:
         - name: PORT
-          value: "3006"
+          value: "3005"
         - name: DB_HOST
           value: "sb3-u1-aurora.cluster-cpuskg4g6hoy.ap-northeast-2.rds.amazonaws.com"
         - name: DB_USER
@@ -35,20 +30,23 @@ spec:
           value: "Admin1234!"
         - name: DB_NAME
           value: "blossom"
+        - name: ORDER_API_URL
+          value: "http://orders-service"
+        - name: REDIS_HOST
+          value: "${REDIS_ENDPOINT}"
+        - name: REDIS_PORT
+          value: "6379"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: lex-api-service
-  namespace: default
+  name: payments-service
   labels:
-    app: lex-api
+    app: payments
 spec:
   type: ClusterIP
   selector:
-    app: lex-api
+    app: payments
   ports:
   - port: 80
-    targetPort: 3006
-    protocol: TCP
-    name: http
+    targetPort: 3005

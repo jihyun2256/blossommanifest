@@ -12,17 +12,12 @@ metadata:
     alb.ingress.kubernetes.io/success-codes: "200,204"
     alb.ingress.kubernetes.io/preserve-host-header: "true"
 
-
 spec:
   ingressClassName: alb
   rules:
   - host: www.bipa-g3-ec.click
     http:
       paths:
-
-      # ===========================
-      # USERS
-      # ===========================
       - path: /users
         pathType: Prefix
         backend:
@@ -30,10 +25,6 @@ spec:
             name: users-service
             port:
               number: 80
-
-      # ===========================
-      # CARTS
-      # ===========================
       - path: /carts
         pathType: Prefix
         backend:
@@ -41,10 +32,6 @@ spec:
             name: carts-service
             port:
               number: 80
-
-      # ===========================
-      # ORDERS
-      # ===========================
       - path: /orders
         pathType: Prefix
         backend:
@@ -52,10 +39,6 @@ spec:
             name: orders-service
             port:
               number: 80
-
-      # ===========================
-      # PRODUCTS
-      # ===========================
       - path: /products
         pathType: Prefix
         backend:
@@ -63,10 +46,6 @@ spec:
             name: products-service
             port:
               number: 80
-
-      # ===========================
-      # PAYMENTS (Rewrite 기능 적용됨)
-      # ===========================
       - path: /payments
         pathType: Prefix
         backend:
@@ -74,10 +53,6 @@ spec:
             name: payments-service
             port:
               number: 80
-
-      # ===========================
-      # LEX API
-      # ===========================
       - path: /lex
         pathType: Prefix
         backend:

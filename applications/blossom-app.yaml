@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blossom-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/jihyun2256/blossommanifest.git"
+    targetRevision: main
+    path: apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
