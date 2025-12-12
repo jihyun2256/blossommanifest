@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/jihyun2256/blossommanifest.git"
+    repoURL: https://github.com/jihyun2256/blossommanifest.git
     targetRevision: main
     path: apps
   destination:
@@ -16,3 +16,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  revisionHistoryLimit: 10
