@@ -1,0 +1,19 @@
+  GNU nano 8.3                                       nodeclass.yaml
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  role: "KarpenterNodeRole"
+
+  # AL2023 최신 AMI 자동 선택
+  amiSelectorTerms:
+    - alias: "al2023@latest"
+
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "sb3-u2-eks-main"
+
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "sb3-u2-eks-main"
