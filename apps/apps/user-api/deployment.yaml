@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: 337112169365.dkr.ecr.ap-northeast-3.amazonaws.com/sb3-u2-blossom/user-api:latest
+        image: 337112169365.dkr.ecr.ap-northeast-3.amazonaws.com/sb3-u2-blossom/user-api:5329ac5d169626a2b0913fa06a2c4fd1b751ebc5
         ports:
         - containerPort: 3001
         env:
