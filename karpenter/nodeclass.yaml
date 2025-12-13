@@ -3,7 +3,7 @@ kind: EC2NodeClass
 metadata:
   name: default
 spec:
-  role: "KarpenterNodeRole"
+  role: "sb3-u2-karpenter-node-role"
 
   # AL2023 최신 AMI 자동 선택
   amiSelectorTerms:
