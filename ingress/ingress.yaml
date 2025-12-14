@@ -1,0 +1,96 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blossom-ingress
+  namespace: default
+  annotations:
+    # ============================================================
+    # ALB 기본 설정
+    # ============================================================
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    
+    # ============================================================
+    # ⭐ ACM 인증서 설정 (Terraform에서 주입)
+    # ============================================================
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.acm.certificateArn }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    
+    # ============================================================
+    # 헬스체크 설정
+    # ============================================================
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "15"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"
+    alb.ingress.kubernetes.io/success-codes: "200,204"
+    
+    # ============================================================
+    # 기타 설정
+    # ============================================================
+    alb.ingress.kubernetes.io/preserve-host-header: "true"
+
+spec:
+  ingressClassName: alb
+  
+  # ============================================================
+  # ⭐ 도메인 설정 (Terraform에서 주입)
+  # ============================================================
+  rules:
+    - host: www.bipa-g3-ec.click
+      http:
+        paths:
+          # User API
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: user-api
+                port:
+                  number: 80
+
+          # Product API
+          - path: /products
+            pathType: Prefix
+            backend:
+              service:
+                name: product-api
+                port:
+                  number: 80
+
+          # Order API
+          - path: /orders
+            pathType: Prefix
+            backend:
+              service:
+                name: order-api
+                port:
+                  number: 80
+
+          # Cart API
+          - path: /carts
+            pathType: Prefix
+            backend:
+              service:
+                name: cart-api
+                port:
+                  number: 80
+
+          # Payment API
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-api
+                port:
+                  number: 80
+
+          # Lex API
+          - path: /lex
+            pathType: Prefix
+            backend:
+              service:
+                name: lex-api
+                port:
+                  number: 80
