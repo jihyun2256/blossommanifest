@@ -16,16 +16,16 @@ spec:
     spec:
       containers:
       - name: product
-        image: 337112169365.dkr.ecr.ap-northeast-3.amazonaws.com/sb3-u2-blossom/product-api:5329ac5d169626a2b0913fa06a2c4fd1b751ebc5
+        image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/product-api:5329ac5d169626a2b0913fa06a2c4fd1b751ebc5
         ports:
         - containerPort: 3002
         env:
         - name: PORT
           value: "3002"
         - name: DB_HOST
-          value: "sb3-u2-aurora.cluster-cf2o8qwgm7mv.ap-northeast-3.rds.amazonaws.com"
+          value: "sb3-u1-aurora.cluster-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_READ_HOST
-          value: "sb3-u2-aurora.cluster-ro-cf2o8qwgm7mv.ap-northeast-3.rds.amazonaws.com"
+          value: "sb3-u1-aurora.cluster-ro-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_USER
           value: "admin"
         - name: DB_PASSWORD
@@ -33,7 +33,7 @@ spec:
         - name: DB_NAME
           value: "blossom"
         - name: AWS_REGION
-          value: "ap-northeast-3"
+          value: "us-east-1"
         - name: S3_BUCKET
           value: "sb3-u4-eks-test"
 ---
