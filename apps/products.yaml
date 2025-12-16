@@ -23,7 +23,7 @@ spec:
         - name: PORT
           value: "3002"
         - name: DB_HOST
-          value: "sb3-u1-aurora.cluster-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
+          value: "sb3-u2-aurora.cluster-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_READ_HOST
           value: "sb3-u1-aurora.cluster-ro-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_USER
@@ -32,10 +32,12 @@ spec:
           value: "Admin1234!"
         - name: DB_NAME
           value: "blossom"
-        - name: AWS_REGION
-          value: "us-east-1"
-        - name: S3_BUCKET
-          value: "sb3-u4-eks-test"
+        - name: REDIS_HOST
+          value: "sb3-u2-redis.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+        - name: REDIS_READER_HOST
+          value: "sb3-u2-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+        - name: REDIS_PORT
+          value: "6379"
 ---
 apiVersion: v1
 kind: Service

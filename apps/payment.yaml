@@ -23,7 +23,7 @@ spec:
         - name: PORT
           value: "3005"
         - name: DB_HOST
-          value: "sb3-u1-aurora.cluster-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
+          value: "sb3-u2-aurora.cluster-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_READ_HOST
           value: "sb3-u1-aurora.cluster-ro-cuv62qsm0iad.us-east-1.rds.amazonaws.com"
         - name: DB_USER
@@ -35,9 +35,11 @@ spec:
         - name: ORDER_API_URL
           value: "http://orders-service"
         - name: REDIS_HOST
-          value: "sb3-u1-redis.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+          value: "sb3-u2-redis.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
         - name: REDIS_READER_HOST
-          value: "sb3-u1-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+          value: "sb3-u2-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+        - name: REDIS_PORT
+          value: "6379"
         - name: REDIS_PORT
           value: "6379"
 ---

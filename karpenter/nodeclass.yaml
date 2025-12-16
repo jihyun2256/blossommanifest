@@ -3,7 +3,7 @@ kind: EC2NodeClass
 metadata:
   name: default
 spec:
-  role: "sb3-u1-karpenter-node-role"
+  role: "sb3-u2-karpenter-node-role"
 
   # AL2023 최신 AMI 자동 선택
   amiSelectorTerms:
@@ -11,8 +11,8 @@ spec:
 
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "sb3-u1-eks-main"
+        karpenter.sh/discovery: "sb3-u2-eks-main"
 
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "sb3-u1-eks-main"
+        karpenter.sh/discovery: "sb3-u2-eks-main"
