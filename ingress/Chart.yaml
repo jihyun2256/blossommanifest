@@ -1,0 +1,6 @@
+apiVersion: v2
+name: blossom-ingress
+description: Ingress for Blossom E-commerce
+type: application
+version: 0.1.0
+appVersion: "1.0"
