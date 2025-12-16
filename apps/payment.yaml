@@ -35,9 +35,9 @@ spec:
         - name: ORDER_API_URL
           value: "http://orders-service"
         - name: REDIS_HOST
-          value: "sb3-u2-redis.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+          value: "sb3-u2-redis.ojjs5i.ng.0001.use1.cache.amazonaws.com"
         - name: REDIS_READER_HOST
-          value: "sb3-u2-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com:6379"
+          value: "sb3-u2-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com"
         - name: REDIS_PORT
           value: "6379"
 ---
