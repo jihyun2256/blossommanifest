@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: lex-api
-        image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/lex-api:5329ac5d169626a2b0913fa06a2c4fd1b751ebc5
+        image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/lex-api:latest
         ports:
         - containerPort: 3006
         env:
