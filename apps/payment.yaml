@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: payments
-        image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/payment-api:latest
+        image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/lex-api:latest
         ports:
         - containerPort: 3005
         env:
