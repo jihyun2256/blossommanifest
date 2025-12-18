@@ -46,7 +46,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: user-api
+                name: users-service
                 port:
                   number: 80
 
@@ -55,7 +55,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: product-api
+                name: products-service
                 port:
                   number: 80
 
@@ -64,7 +64,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: order-api
+                name: orders-service
                 port:
                   number: 80
 
@@ -73,7 +73,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: cart-api
+                name: carts-service
                 port:
                   number: 80
 
@@ -82,7 +82,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: payment-api
+                name: payments-service
                 port:
                   number: 80
 
@@ -91,6 +91,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: lex-api
+                name: lex-api-service
                 port:
                   number: 80
