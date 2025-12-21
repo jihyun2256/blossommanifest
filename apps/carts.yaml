@@ -17,6 +17,7 @@ spec:
       containers:
       - name: cart
         image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/cart-api:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 3004
         env:

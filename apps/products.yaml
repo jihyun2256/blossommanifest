@@ -17,6 +17,7 @@ spec:
       containers:
       - name: product
         image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/product-api:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 3002
         env:
