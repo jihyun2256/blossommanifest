@@ -5,23 +5,18 @@ metadata:
   namespace: default
   labels:
     app: user
-    argocd.argoproj.io/instance: blossom-app
-
 spec:
   replicas: 2
   revisionHistoryLimit: 10
   progressDeadlineSeconds: 600
-
   selector:
     matchLabels:
       app: user
-
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-
   template:
     metadata:
       labels:
@@ -29,13 +24,10 @@ spec:
     spec:
       containers:
         - name: user
-          image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/user-api:50c70d79f7fb5ac29616a6eac0d45f493954f0e9
+          image: 337112169365.dkr.ecr.us-east-1.amazonaws.com/sb3-u2-blossom/user-api:${GITHUB_SHA}
           imagePullPolicy: IfNotPresent
-
           ports:
             - containerPort: 3001
-              protocol: TCP
-
           env:
             - name: PORT
               value: "3001"
@@ -55,7 +47,6 @@ spec:
               value: sb3-u2-redis-ro.ojjs5i.ng.0001.use1.cache.amazonaws.com
             - name: REDIS_PORT
               value: "6379"
-
           resources:
             requests:
               cpu: "100m"
@@ -64,10 +55,18 @@ spec:
               cpu: "500m"
               memory: "256Mi"
 
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-
-      restartPolicy: Always
-      dnsPolicy: ClusterFirst
-      schedulerName: default-scheduler
-      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+  namespace: default
+  labels:
+    app: user
+spec:
+  type: ClusterIP
+  selector:
+    app: user
+  ports:
+    - port: 80
+      targetPort: 3001
